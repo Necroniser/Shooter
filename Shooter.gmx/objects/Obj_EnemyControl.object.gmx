@@ -29,7 +29,7 @@
 totalspawnpoints = instance_number(Obj_Spawnpoint);
 //Variables
 ZombieToughChance = 10;
-ZombieFastChance = 20;
+ZombieFastChance = 20+ZombieToughChance;
 ZombieType = Obj_ZombieBasic;
 Zombiecount = 0;
 </string>
@@ -61,11 +61,12 @@ spawnpointnumber = round(random_range(1,totalspawnpoints));
 chosenspawnpoint = instance_find(Obj_Spawnpoint,spawnpointnumber);
 
 //Determining Which Type of Zombie to spawn
-chance = round(random_range(1,100));
+chance = round(random_range(1,ZombieFastChance+70));
 if (chance&lt;ZombieToughChance)
 {
 Zombietype = Obj_ZombieTough;
 }
+else
 if (chance&lt;ZombieFastChance &amp;&amp; chance&gt;ZombieToughChance)
 {
 Zombietype = Obj_ZombieFast;

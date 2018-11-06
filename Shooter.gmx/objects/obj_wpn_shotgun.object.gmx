@@ -11,20 +11,6 @@
     <event eventtype="0" enumb="0">
       <action>
         <libid>1</libid>
-        <id>604</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_inherited</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-      </action>
-      <action>
-        <libid>1</libid>
         <id>603</id>
         <kind>7</kind>
         <userelative>0</userelative>
@@ -39,16 +25,23 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>fire_rate = 60
+            <string>///Variables
+//Gun
+destroy = false;
+auto = false;
 damage = 9;
-spread_growth = 10
-auto = false
-bullets_per_shot = 8
-spread_bullet_variance = 25
+fire_rate = 60;
 magazine_size = 8;
-max_weapon_spread = 55;
-ammoreloading = 0;
 ammoloaded = obj_player.Shotgun_ammoloaded;
+ammoreloading = 0;
+ammo_used_per_shot = 1;  
+//Bullets
+bullets_per_shot = 8;
+bullet_speed = 20;
+spread_base = 0;
+spread_growth = 10;
+spread_bullet_variance = 25;
+max_weapon_spread = 55;
 </string>
           </argument>
         </arguments>
@@ -95,7 +88,8 @@ audio_play_sound(Snd_ShotgunCock, 1 ,false);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>ammoloaded = clamp(ammoloaded,0,magazine_size);
+            <string>///Ammo Control
+ammoloaded = clamp(ammoloaded,0,magazine_size);
 obj_player.Shotgun_ammoloaded = ammoloaded;
 </string>
           </argument>

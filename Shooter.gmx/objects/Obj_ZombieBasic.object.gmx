@@ -11,20 +11,6 @@
     <event eventtype="0" enumb="0">
       <action>
         <libid>1</libid>
-        <id>604</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_inherited</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-      </action>
-      <action>
-        <libid>1</libid>
         <id>603</id>
         <kind>7</kind>
         <userelative>0</userelative>
@@ -50,7 +36,7 @@ value = 50;
 alarm[1] = -1;
 attackspeed = 48;
 itemdroprate = 35;
-healthdroprate = 10;
+healthdroprate = 30;
 pistolammodroprate = 23 +healthdroprate;
 smgammodroprate = 15 +pistolammodroprate;
 rifleammodroprate = 15 +smgammodroprate;
@@ -81,7 +67,9 @@ speed_mod = 1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Whether or not to drop an item
+            <string>///Item Drops
+
+//Whether or not to drop an item
 dropnumber = round(random_range(1,100));
 if dropnumber &lt;= itemdroprate
 {
@@ -90,6 +78,7 @@ if dropnumber &lt;= itemdroprate
 if (itemtobedropped)
 {
 dropnumber = round(random_range(1,topchance));
+
     if (dropnumber&gt;=0 &amp;&amp; dropnumber&lt;healthdroprate)
     {
         instance_create(x,y,Obj_Healthpack);
@@ -116,6 +105,7 @@ dropnumber = round(random_range(1,topchance));
     };
 }
 
+//Stat Update
 global.TotalKills += 1;
 global.BasicKills += 1;
 </string>
@@ -140,7 +130,8 @@ global.BasicKills += 1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if collision_point(x,y,obj_player,true,true)
+            <string>///Attacking Player
+if collision_point(x,y,obj_player,true,true)
 {
 audio_play_sound(Snd_PlayerHurt,1,false);
 obj_player.hp -= damage;
@@ -176,7 +167,7 @@ if (mp_grid_path(global.grid, path, x, y, playerx, playery, 1))
 {
     path_start(path, move_speed*speed_mod, path_action_stop, false); 
 };
-
+//Time until next pathing
 alarm[0] = 10;
 </string>
           </argument>
@@ -214,7 +205,7 @@ alarm[0] = 10;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Determining slowings
+            <string>///Determining slowings
 if (place_meeting(x, y, Obj_speed_modifier))
 {
     var o_spd_mod;
@@ -260,7 +251,8 @@ else
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>    if alarm[1] == -1
+            <string>///Starting Attack Timer
+if alarm[1] == -1
 {
     audio_play_sound(Snd_PlayerHurt,1,false);
     obj_player.hp -= damage;
@@ -273,6 +265,20 @@ else
       </action>
     </event>
     <event eventtype="4" ename="obj_bullet">
+      <action>
+        <libid>1</libid>
+        <id>604</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_inherited</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+      </action>
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -289,7 +295,8 @@ else
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>blood = instance_create(x,y,Obj_BloodSpurt);
+            <string>///Creating Blood Spurts
+blood = instance_create(x,y,Obj_BloodSpurt);
 with (blood)
 {
     image_angle = bullet.image_angle;
@@ -297,20 +304,6 @@ with (blood)
 </string>
           </argument>
         </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>604</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_inherited</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
       </action>
     </event>
     <event eventtype="8" enumb="0">
@@ -330,7 +323,8 @@ with (blood)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_self();
+            <string>///Drawing Self
+draw_self();
 image_angle = direction -90;
 </string>
           </argument>

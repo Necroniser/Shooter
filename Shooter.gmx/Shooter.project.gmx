@@ -105,9 +105,6 @@
     </scripts>
     <script>scripts\Notes.gml</script>
   </scripts>
-  <shaders name="shaders">
-    <shader type="GLSLES">shaders\shd_multiply.shader</shader>
-  </shaders>
   <fonts name="fonts">
     <font>fonts\Fnt_Base</font>
   </fonts>
@@ -173,7 +170,6 @@
   <rooms name="rooms">
     <room>rooms\Room_Menu</room>
     <room>rooms\Room_TestMap</room>
-    <room>rooms\Room_BugMap</room>
     <room>rooms\Room_Gameover</room>
   </rooms>
   <help>

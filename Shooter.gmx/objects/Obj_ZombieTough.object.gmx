@@ -11,20 +11,6 @@
     <event eventtype="0" enumb="0">
       <action>
         <libid>1</libid>
-        <id>604</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_inherited</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-      </action>
-      <action>
-        <libid>1</libid>
         <id>603</id>
         <kind>7</kind>
         <userelative>0</userelative>
@@ -39,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>minhp = 190;
+            <string>///Variables
+minhp = 190;
 maxhp = 300;
 hp = round(random_range(minhp,maxhp))
 damage = 30;
@@ -59,7 +46,6 @@ vectorammodroprate = 10+shotgunammodroprate;
 topchance = vectorammodroprate;
 itemtobedropped = false;
 speed_mod = 1;
-
 </string>
           </argument>
         </arguments>
@@ -82,7 +68,8 @@ speed_mod = 1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Whether or not to drop an item
+            <string>///Item Drops
+//Whether or not to drop an item
 dropnumber = round(random_range(1,100));
 if dropnumber &lt;= itemdroprate
 {
@@ -141,7 +128,8 @@ global.ToughKills += 1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if collision_point(x,y,obj_player,true,true)
+            <string>///Starting Attack
+if collision_point(x,y,obj_player,true,true)
 {
 audio_play_sound(Snd_PlayerHurt,1,false);
 obj_player.hp -= damage;
@@ -178,6 +166,7 @@ if (mp_grid_path(global.grid, path, x, y, playerx, playery, 1))
     path_start(path, move_speed*speed_mod, path_action_stop, false); 
 };
 
+//Recheck Timer
 alarm[0] = 5;
 </string>
           </argument>

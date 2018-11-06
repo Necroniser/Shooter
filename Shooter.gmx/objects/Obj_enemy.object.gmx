@@ -25,7 +25,26 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>hp = 30
+            <string>minhp = 0;
+maxhp = 0;
+hp = round(random_range(minhp,maxhp))
+damage = 0;
+move_speed = 1.5;
+alarm[0] = 10;
+path = path_add();
+value = 0;
+alarm[1] = -1;
+attackspeed = 0;
+itemdroprate = 0;
+healthdroprate = 1;
+pistolammodroprate = 1 + healthdroprate;
+smgammodroprate = 1 + pistolammodroprate;
+rifleammodroprate = 1 + smgammodroprate;
+shotgunammodroprate = 1 + rifleammodroprate;
+vectorammodroprate = 1 + shotgunammodroprate;
+topchance = vectorammodroprate;
+itemtobedropped = false;
+speed_mod = 1;
 </string>
           </argument>
         </arguments>
@@ -48,7 +67,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (hp &lt;= 0)
+            <string>///Kill Object
+if (hp &lt;= 0)
 {
     instance_destroy()
     score += value;
