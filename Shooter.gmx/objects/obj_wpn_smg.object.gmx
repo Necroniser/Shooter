@@ -29,7 +29,7 @@
 //Gun
 destroy = false;
 auto = true;
-damage = 10;
+damage = 14;
 fire_rate = 5;
 magazine_size = 32;
 ammoloaded = obj_player.SMG_ammoloaded;
@@ -37,7 +37,7 @@ ammoreloading = 0;
 ammo_used_per_shot = 1;  
 //Bullets
 bullets_per_shot = 1;
-bullet_speed = 20;
+bullet_speed = 15;
 spread_base = 3;
 spread_growth = 5;
 spread_bullet_variance = 1;

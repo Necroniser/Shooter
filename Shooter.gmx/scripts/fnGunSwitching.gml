@@ -1,7 +1,7 @@
 //Used for testing
 
 //Pistol
-if (keyboard_check_pressed(ord('1'))) && !(current_weapon = 1) && (can_fire)
+if ((keyboard_check_pressed(ord('1'))) || (((current_weapon = 5) && (gamepad_button_check_pressed(0,gp_shoulderr))) || ((current_weapon = 2) && (gamepad_button_check_pressed(0,gp_shoulderl))))) && !(current_weapon = 1) && (can_fire)
 {
     ammoreloading = 0;
     alarm[2] = -1;
@@ -27,7 +27,7 @@ weapon.alarm[1] = -1;
 }
 
 //SMG
-if (keyboard_check_pressed(ord('2'))) && !(current_weapon = 2) && (can_fire)
+if ((keyboard_check_pressed(ord('2'))) || (((current_weapon = 1) && (gamepad_button_check_pressed(0,gp_shoulderr))) || ((current_weapon = 3) && (gamepad_button_check_pressed(0,gp_shoulderl))))) && !(current_weapon = 2) && (can_fire)
 {
     ammoreloading = 0;
     alarm[2] = -1;
@@ -52,7 +52,7 @@ weapon.alarm[1] = -1;
 }
 
 //Rifle
-if (keyboard_check_pressed(ord('3'))) && !(current_weapon = 3) && (can_fire)
+if ((keyboard_check_pressed(ord('3'))) || (((current_weapon = 2) && (gamepad_button_check_pressed(0,gp_shoulderr))) || ((current_weapon = 4) && (gamepad_button_check_pressed(0,gp_shoulderl))))) && !(current_weapon = 3) && (can_fire)
 {
     ammoreloading = 0;
     alarm[2] = -1;
@@ -78,7 +78,7 @@ weapon.alarm[1] = -1;
 }
 
 //Shotgun
-if (keyboard_check_pressed(ord('4'))) && !(current_weapon = 4) && (can_fire)
+if ((keyboard_check_pressed(ord('4'))) || (((current_weapon = 3) && (gamepad_button_check_pressed(0,gp_shoulderr))) || ((current_weapon = 5) && (gamepad_button_check_pressed(0,gp_shoulderl))))) && !(current_weapon = 4) && (can_fire)
 {
     ammoreloading = 0;
     alarm[2] = -1;
@@ -102,7 +102,7 @@ weapon.alarm[1] = -1;
 }
 
 //Vector
-if (keyboard_check_pressed(ord('5'))) && !(current_weapon = 5) && (can_fire)
+if ((keyboard_check_pressed(ord('5'))) || (((current_weapon = 4) && (gamepad_button_check_pressed(0,gp_shoulderr))) || ((current_weapon = 1) && (gamepad_button_check_pressed(0,gp_shoulderl)))))  && !(current_weapon = 5) && (can_fire)
 {
     ammoreloading = 0;
     alarm[2] = -1;

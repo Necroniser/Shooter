@@ -56,7 +56,7 @@ global.TotalShots += 1;
         <isnot>0</isnot>
       </action>
     </event>
-    <event eventtype="4" ename="Obj_block">
+    <event eventtype="4" ename="Obj_Walls">
       <action>
         <libid>1</libid>
         <id>203</id>

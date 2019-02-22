@@ -37,7 +37,7 @@ ammoreloading = 0;
 ammo_used_per_shot = 1;  
 //Bullets
 bullets_per_shot = 1;
-bullet_speed = 20;
+bullet_speed = 15;
 spread_base = 0;
 spread_growth = 2;
 spread_bullet_variance = 0;

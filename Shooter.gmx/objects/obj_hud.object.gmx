@@ -25,9 +25,21 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>player = -1;
+            <string>///Variables
+
+//Local
+player = -1;
 score = 0;
-global.Round = 1;
+TextAlpha = 1;
+AlphaChange = 0;
+DisplayingRound = false;
+Changing = true;
+cursor_sprite = Spr_Crosshair;
+window_set_cursor(cr_none);
+
+
+//Global
+global.Round = 0;
 global.Roundstart = true;
 global.TotalKills = 0;
 global.BasicKills = 0;
@@ -37,6 +49,8 @@ global.DamageDealt = 0;
 global.DamageReceived = 0;
 global.TotalShots = 0;
 global.TotalHits = 0;
+
+fnSpawnScheduleInit();
 </string>
           </argument>
         </arguments>
@@ -84,7 +98,6 @@ global.TotalHits = 0;
             <kind>1</kind>
             <string>if !(instance_exists(Obj_ZombieBasic)) &amp;&amp; !(instance_exists(Obj_ZombieFast)) &amp;&amp; !(instance_exists(Obj_ZombieTough)) &amp;&amp; (global.Roundstart == false) &amp;&amp; (Obj_EnemyControl.Zombiecount = 0)
 {
-    global.Round += 1;
     global.Roundstart = true;
 };
 </string>
@@ -109,11 +122,17 @@ global.TotalHits = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//HUD Backings
+            <string>///Drawing Display
+
+
+
+//HUD Backings
 draw_sprite(Spr_HUDHealthBarBacking,0,view_xview[0]+8,view_yview[0]+view_hview[0]-16);
 draw_sprite(Spr_HUDAmmoBacking,0,view_xview[0],view_yview[0]);
 draw_sprite(Spr_HUDScoreBacking,0,view_xview[0] + view_wview[0] ,view_yview[0]);
 draw_sprite(Spr_HUDHealthBarBacking,0,view_xview[0]+44,view_yview[0]+view_hview[0]-16);
+
+
 
 //Health Bar
 hp = obj_player.hp;
@@ -124,20 +143,89 @@ else
 draw_rectangle(view_xview[0]+12,view_yview+view_hview[0]-20,view_xview[0]+26,view_yview[0]+view_hview[0]-20-hp,false);
 draw_set_colour(c_black);
 
+
+
 //Stamina Bar
 stamina = obj_player.stamina div 2
 draw_set_colour(c_blue);
 draw_rectangle(view_xview[0] + 48, view_yview[0]+view_hview[0]-20,view_xview[0]+62,view_yview[0]+view_hview[0]-20-stamina,false);
+
+
 
 //Score
 draw_set_font(Fnt_Base);
 draw_set_colour(c_black);
 draw_text(view_xview[0]+view_wview[0]-120,view_yview[0]+6,"Score: "+string(score));
 
+
+
 //Round
+if (global.Roundstart == true) // Start Displaying
+{
+    TextAlpha = 1;
+    AlphaChange = 0;
+    Changing = true;
+    DisplayingRound = false;
+};
+
+if (DisplayingRound == false) &amp;&amp; (global.Round != 0)// Normal Display Position
+{
+draw_set_alpha(TextAlpha);
 draw_set_font(Fnt_Base);
 draw_set_colour(c_white);
 draw_text(view_xview[0]+(view_wview[0]/2)-40,view_yview[0]+6,"Round: " + string(global.Round));
+draw_set_alpha(1);
+draw_set_halign(fa_left);
+};
+
+if (DisplayingRound == true) // Large Display Position
+{
+    //Drawing Text
+    draw_set_font(Fnt_LargeBase);
+    draw_set_colour(c_maroon);
+    draw_set_alpha(TextAlpha);
+    draw_set_halign(fa_center);
+    draw_text(view_xview[0]+(view_wview[0]/2),view_yview[0]+(view_hview[0]/3),"Round: " + string(global.Round));
+    draw_set_alpha(1);
+    draw_set_font(Fnt_Base);
+    draw_set_colour(c_white);
+    draw_set_halign(fa_left);
+};
+
+    //Changing Direction Triggers
+if (TextAlpha == 0) &amp;&amp; (Changing == true) &amp;&amp; (AlphaChange == 0) &amp;&amp; (DisplayingRound == false)// Normal alpha minimizes and Large Starts
+{
+    Changing = false;
+    AlphaChange = 1;
+    DisplayingRound = true;
+    global.Round += 1;
+    TextAlpha += .01;
+};
+if (TextAlpha &gt; .99) &amp;&amp; (Changing == false) &amp;&amp; (AlphaChange == 1) &amp;&amp; (DisplayingRound == true) // Large Alpha maxes out
+{
+    AlphaChange = 0;
+};
+if (TextAlpha = 0) &amp;&amp; (Changing == false) &amp;&amp; (AlphaChange == 0) &amp;&amp; (DisplayingRound == true) // Large Alpha triggers to Normal Alpha
+{
+    AlphaChange = 1;
+    DisplayingRound = false;  
+};
+
+    //Changing TextAlpha
+if (AlphaChange == 0) &amp;&amp; (TextAlpha &gt; .01)
+{
+    TextAlpha -= 0.01;
+};
+if (AlphaChange == 0) &amp;&amp; (TextAlpha &lt;= .01)
+{
+    TextAlpha = 0;
+};
+if (AlphaChange == 1) &amp;&amp; (TextAlpha &lt; 1)
+{
+    TextAlpha += 0.01;
+};
+
+
 
 //Ammo
 if (player != -1) {

@@ -2,16 +2,16 @@
 var fire_activated;
 fire_activated = false;
 
-if (weapon.auto == true  && mouse_check_button(mb_left)) { 
+if (weapon.auto == true  && (mouse_check_button(mb_left) || (gamepad_button_check(0,gp_shoulderrb)))) { 
     fire_activated = true; 
 }
 
-if (weapon.auto == false && mouse_check_button_pressed(mb_left)) { 
+if (weapon.auto == false && (mouse_check_button_pressed(mb_left)) || (gamepad_button_check_pressed(0,gp_shoulderrb))){ 
     fire_activated = true; 
 }
 
 //Check For Empty Clip
-if mouse_check_button_pressed(mb_left) and can_fire and current_ammo = 0
+if (mouse_check_button_pressed(mb_left) || gamepad_button_check_pressed(0,gp_shoulderrb)) and can_fire and current_ammo = 0
 {
     audio_play_sound(Snd_EmptyClip,1,false);
 }

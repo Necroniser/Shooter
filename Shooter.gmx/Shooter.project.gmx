@@ -34,6 +34,10 @@
       <sound>sound\Snd_Footstep2</sound>
       <sound>sound\Snd_Footstep3</sound>
     </sounds>
+    <sounds name="Environment Sounds">
+      <sound>sound\Snd_BarrierBreak</sound>
+      <sound>sound\Snd_BarrierFix</sound>
+    </sounds>
   </sounds>
   <sprites name="sprites">
     <sprites name="Walls">
@@ -49,6 +53,7 @@
       <sprite>sprites\Spr_Chair</sprite>
       <sprite>sprites\Spr_Table</sprite>
       <sprite>sprites\Spr_MetalShelving</sprite>
+      <sprite>sprites\Spr_WindowBarrier</sprite>
     </sprites>
     <sprites name="Enemies">
       <sprite>sprites\Spr_Target</sprite>
@@ -75,6 +80,7 @@
     <sprites name="Player">
       <sprite>sprites\spr_player</sprite>
       <sprite>sprites\spr_bullet</sprite>
+      <sprite>sprites\Spr_Crosshair</sprite>
     </sprites>
     <sprites name="Menu GUI">
       <sprite>sprites\Spr_PlayGameButton</sprite>
@@ -92,6 +98,7 @@
     <backgrounds name="Outside Tiling">
       <background>background\Tile_Grass</background>
     </backgrounds>
+    <background>background\background5</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
@@ -99,14 +106,17 @@
       <script>scripts\fnPlayerMovement.gml</script>
       <script>scripts\fnPlayerFiring.gml</script>
       <script>scripts\fnGunSwitching.gml</script>
+      <script>scripts\fnPlayerFixBarrier.gml</script>
     </scripts>
     <scripts name="General">
       <script>scripts\fnCollisions.gml</script>
+      <script>scripts\fnSpawnScheduleInit.gml</script>
     </scripts>
     <script>scripts\Notes.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\Fnt_Base</font>
+    <font>fonts\Fnt_LargeBase</font>
   </fonts>
   <objects name="objects">
     <objects name="Walls">
@@ -115,6 +125,7 @@
       <object>objects\Obj_BrickWindow</object>
       <object>objects\Obj_ConcreteWall</object>
       <object>objects\Obj_GarageDoor</object>
+      <object>objects\Obj_Walls</object>
     </objects>
     <objects name="Weapons">
       <object>objects\obj_weapon_data</object>
@@ -137,6 +148,7 @@
       </objects>
       <objects name="Other">
         <object>objects\Obj_LowWall</object>
+        <object>objects\Obj_WindowBarrier</object>
       </objects>
     </objects>
     <objects name="Enemies">
@@ -150,7 +162,6 @@
       <object>objects\Obj_ZombieFast</object>
       <object>objects\Obj_ZombieTough</object>
       <object>objects\Obj_BloodSpurt</object>
-      <object>objects\Obj_ZombieBasicDead</object>
     </objects>
     <objects name="Items">
       <object>objects\Obj_Healthpack</object>

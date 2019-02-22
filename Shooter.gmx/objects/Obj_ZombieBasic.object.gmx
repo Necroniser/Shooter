@@ -45,6 +45,8 @@ vectorammodroprate = 16 +shotgunammodroprate;
 topchance = vectorammodroprate;
 itemtobedropped = false;
 speed_mod = 1;
+breaking = false;
+breakspeed = room_speed*3;
 </string>
           </argument>
         </arguments>
@@ -113,6 +115,40 @@ global.BasicKills += 1;
         </arguments>
       </action>
     </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>touch = place_meeting(x,y,Obj_WindowBarrier);
+targetbarrier = instance_nearest(x,y,Obj_WindowBarrier);
+if (touch) &amp;&amp; (targetbarrier.hp &gt; 0)
+{
+breaking = true;
+targetbarrier.hp -= 1;
+audio_play_sound_at(Snd_BarrierBreak,x,y,0,100,100,1,0,1);
+alarm[2] = breakspeed;
+}
+else
+if (targetbarrier.hp = 0)
+{breaking = false;}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="2" enumb="1">
       <action>
         <libid>1</libid>
@@ -168,7 +204,7 @@ if (mp_grid_path(global.grid, path, x, y, playerx, playery, 1))
     path_start(path, move_speed*speed_mod, path_action_stop, false); 
 };
 //Time until next pathing
-alarm[0] = 10;
+alarm[0] = 4;
 </string>
           </argument>
         </arguments>
@@ -226,9 +262,10 @@ if (place_meeting(x,y,Obj_BrickWindow))
     }
 }
 else
-{
-    speed_mod = 1;
-}
+{speed_mod = 1;}
+
+if (breaking)
+{speed_mod = 0;}
 </string>
           </argument>
         </arguments>
@@ -259,6 +296,39 @@ if alarm[1] == -1
     global.DamageReceived += damage;
     alarm[1] = attackspeed;
 };
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="Obj_WindowBarrier">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (other.hp &gt; 0) &amp;&amp; !(breaking)
+{
+    breaking = true;
+    speed_mod = 0;
+    other.hp -= 1;
+    audio_play_sound_at(Snd_BarrierBreak,x,y,0,100,100,1,0,1);
+    alarm[2] = breakspeed;
+}
+else
+if (other.hp = 0)
+{breaking = false};
 </string>
           </argument>
         </arguments>

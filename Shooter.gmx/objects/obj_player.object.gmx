@@ -60,9 +60,46 @@ movespeed = 2;
 sprint_speed = 3;
 staminauserate = 2;
 staminaregainrate = 2;
+repairtime = 1.15;
+repairing = false;
 
 hp = 100;
 stamina=200;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>targetbarrier = instance_nearest(x,y,Obj_WindowBarrier);
+if (targetbarrier.hp &lt; 3) &amp;&amp; (repairing)
+{
+targetbarrier.hp += 1;
+audio_stop_sound(Snd_BarrierFix);
+audio_play_sound(Snd_BarrierFix,1,0);
+alarm[4] = repairtime * room_speed;
+}
+else
+{
+repairing = false;
+movespeed = 2;
+};
 </string>
           </argument>
         </arguments>
@@ -195,6 +232,7 @@ switch(current_weapon)
 fnCollisions();
 fnPlayerFiring();
 fnGunSwitching();
+fnPlayerFixBarrier();
 </string>
           </argument>
         </arguments>
